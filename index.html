@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday My Love</title>
+    <style>
+        body {
+            background-color: pink;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 50px;
+            margin-top: 50px;
+            text-shadow: 2px 2px 5px red;
+        }
+        #birthdayMessage {
+            font-size: 24px;
+            margin: 30px auto;
+            max-width: 80%;
+            display: none;
+            padding: 15px;
+            background-color: rgba(255, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            background-color: red;
+            color: white;
+            border-radius: 25px;
+            margin-top: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 30px;
+            animation: floatUp 6s linear;
+            z-index: -1;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday, My Love! ❤</h1>
+    <button id="surpriseBtn">Click for a Surprise</button>
+    <p id="birthdayMessage">When I first met you, I fell in love; it was the greatest moment of my life. I knew you were the one who would bring happiness to my life, and when I see you every day, my days get bright. 💖</p>
+
+    <script>
+        // Make sure the DOM is fully loaded before running any script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the button and message elements
+            const surpriseBtn = document.getElementById('surpriseBtn');
+            const birthdayMessage = document.getElementById('birthdayMessage');
+            
+            // Add click event listener to the button
+            surpriseBtn.addEventListener('click', function() {
+                // Show the message with a smooth fade-in
+                birthdayMessage.style.display = 'block';
+                birthdayMessage.style.opacity = 0;
+                
+                let opacity = 0;
+                const fadeIn = setInterval(function() {
+                    if (opacity < 1) {
+                        opacity += 0.1;
+                        birthdayMessage.style.opacity = opacity;
+                    } else {
+                        clearInterval(fadeIn);
+                    }
+                }, 50);
+                
+                // Create a burst of hearts when the button is clicked
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(function() {
+                        createHeart();
+                    }, i * 100);
+                }
+            });
+            
+            // Function to create floating hearts
+            function createHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤';
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                
+                // Set a random animation duration
+                const duration = Math.random() * 2 + 4; // 4-6 seconds
+                heart.style.animationDuration = duration + 's';
+                
+                document.body.appendChild(heart);
+                
+                // Remove the heart after animation completes
+                setTimeout(function() {
+                    heart.remove();
+                }, duration * 1000);
+            }
+            
+            // Create hearts continuously
+            setInterval(createHeart, 800);
+        });
+    </script>
+</body>
+</html>
